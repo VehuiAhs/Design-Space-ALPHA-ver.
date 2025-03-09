@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Editor</title>
+    <link rel="stylesheet" href="css/editor.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;500;600&family=Montserrat:wght@400;500;600&family=Lato:wght@400;700&family=Inter:wght@400;500;600&family=Nunito:wght@400;600;700&family=Source+Sans+Pro:wght@400;600&family=Playfair+Display:wght@400;500;600&family=Merriweather:wght@400;700&family=Crimson+Text:wght@400;600&family=Libre+Baskerville:wght@400;700&family=Pacifico&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Satisfy&family=Caveat:wght@400;600&family=Quicksand:wght@400;500;600&family=Comfortaa:wght@400;600" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="editor-nav">
+        <div class="nav-left">
+            <a href="index.html" class="logo"><i class="fas fa-pencil-ruler"></i> Design Space</a>
+            <button id="saveBtn" class="nav-btn" data-tooltip="Save your design"><i class="fas fa-save"></i> Save</button>
+            <button id="downloadBtn" class="nav-btn"><i class="fas fa-download"></i> Download</button>
+        </div>
+        <div class="nav-right">
+            <button id="shareBtn" class="nav-btn"><i class="fas fa-share"></i> Share</button>
+            <div class="user-profile">
+                <img src="https://placehold.co/32x32" alt="Profile" class="profile-img">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Editor Container -->
+    <div class="editor-container">
+        <!-- Left Sidebar - Tools -->
+        <div class="sidebar-container">
+            <button class="panel-toggle" id="panelToggle" title="Toggle Panel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="sidebar sidebar-left">
+                <!-- Canvas Size Section -->
+                <div class="canvas-size-section">
+                    <h3>Canvas Size</h3>
+                    <div class="preset-sizes">
+                        <button class="template-btn" data-preset="instagram-post">
+                            <i class="fas fa-square"></i>
+                            <span>Instagram Post</span>
+                            <small>1080 x 1080</small>
+                        </button>
+                        <button class="template-btn" data-preset="instagram-story">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Instagram Story</span>
+                            <small>1080 x 1920</small>
+                        </button>
+                        <button class="template-btn" data-preset="facebook-post">
+                            <i class="fab fa-facebook-square"></i>
+                            <span>Facebook Post</span>
+                            <small>1200 x 630</small>
+                        </button>
+                        <button class="template-btn" data-preset="twitter-post">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter Post</span>
+                            <small>1200 x 675</small>
+                        </button>
+                        <button class="template-btn" data-preset="presentation">
+                            <i class="fas fa-desktop"></i>
+                            <span>Presentation</span>
+                            <small>1920 x 1080</small>
+                        </button>
+                        <button class="template-btn" data-preset="business-card">
+                            <i class="fas fa-id-card"></i>
+                            <span>Business Card</span>
+                            <small>900 x 500</small>
+                        </button>
+                        <button class="template-btn" data-preset="resume">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Resume</span>
+                            <small>1414 x 2000</small>
+                        </button>
+                        <button class="template-btn" data-preset="custom">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                            <span>Custom Size</span>
+                            <small>800 x 600</small>
+                        </button>
+                    </div>
+                    
+                    <!-- Custom Size Controls -->
+                    <div class="custom-size-controls" style="display: none;">
+                        <div class="size-inputs">
+                            <div class="input-group">
+                                <label>Width (px)</label>
+                                <input type="number" id="customWidth" min="50" max="4000" value="800">
+                            </div>
+                            <div class="input-group">
+                                <label>Height (px)</label>
+                                <input type="number" id="customHeight" min="50" max="4000" value="600">
+                            </div>
+                        </div>
+                        <button id="applyCustomSize" class="apply-btn">Apply Size</button>
+                    </div>
+                </div>
+
+                <!-- Zoom Controls -->
+                <div class="zoom-controls">
+                    <button id="zoomOutBtn" class="zoom-btn" title="Zoom Out">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="zoom-level">
+                        <span id="zoomPercent">100%</span>
+                        <select id="zoomSelect">
+                            <option value="0.25">25%</option>
+                            <option value="0.5">50%</option>
+                            <option value="0.75">75%</option>
+                            <option value="1" selected>100%</option>
+                            <option value="1.25">125%</option>
+                            <option value="1.5">150%</option>
+                            <option value="2">200%</option>
+                            <option value="fit">Fit</option>
+                        </select>
+                    </div>
+                    <button id="zoomInBtn" class="zoom-btn" title="Zoom In">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
+                <!-- Text Tools -->
+                <div class="tool-section">
+                    <h3>Text</h3>
+                    <div class="text-tools">
+                        <button class="tool-btn" id="addHeadingBtn">
+                            <i class="fas fa-heading"></i>
+                            <span>Add Heading</span>
+                        </button>
+                        <button class="tool-btn" id="addSubheadingBtn">
+                            <i class="fas fa-text-height"></i>
+                            <span>Add Subheading</span>
+                        </button>
+                        <button class="tool-btn" id="addTextBtn">
+                            <i class="fas fa-font"></i>
+                            <span>Add Text</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Shape Tools -->
+                <div class="tool-section">
+                    <h3>Shapes</h3>
+                    <div class="shape-tools">
+                        <button class="tool-btn" id="addRectangleBtn" data-shape="rectangle">
+                            <i class="fas fa-square"></i>
+                            <span>Rectangle</span>
+                        </button>
+                        <button class="tool-btn" id="addCircleBtn" data-shape="circle">
+                            <i class="fas fa-circle"></i>
+                            <span>Circle</span>
+                        </button>
+                        <button class="tool-btn" id="addTriangleBtn" data-shape="triangle">
+                            <i class="fas fa-play"></i>
+                            <span>Triangle</span>
+                        </button>
+                        <button class="tool-btn" id="addLineBtn" data-shape="line">
+                            <i class="fas fa-minus"></i>
+                            <span>Line</span>
+                        </button>
+                        <button class="tool-btn" id="addStarBtn" data-shape="star">
+                            <i class="fas fa-star"></i>
+                            <span>Star</span>
+                        </button>
+                        <button class="tool-btn" id="addHexagonBtn" data-shape="hexagon">
+                            <i class="fas fa-stop"></i>
+                            <span>Hexagon</span>
+                        </button>
+                        <button class="tool-btn" id="addArrowBtn" data-shape="arrow">
+                            <i class="fas fa-arrow-right"></i>
+                            <span>Arrow</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Media Tools -->
+                <div class="media-tools tool-section">
+                    <h3>Media</h3>
+                    <div class="tool-buttons">
+                        <button class="tool-btn" id="addImageBtn">
+                            <i class="fas fa-image"></i>
+                            <span>Image</span>
+                        </button>
+                        <button class="tool-btn" id="addVideoBtn">
+                            <i class="fas fa-video"></i>
+                            <span>Video</span>
+                        </button>
+                    </div>
+                    <!-- Hidden file inputs -->
+                    <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+                    <input type="file" id="videoFileInput" accept="video/*" style="display: none;">
+                </div>
+
+                <!-- Templates Section -->
+                <div class="templates-tools tool-section">
+                    <h3>Templates</h3>
+                    <div class="tool-buttons">
+                        <button class="tool-btn" id="browseTemplatesBtn">
+                            <i class="fas fa-th-large"></i>
+                            <span>Browse Templates</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Navigation Sidebar -->
+        <div class="page-sidebar">
+            <div class="page-sidebar-header">
+                <h3>Pages</h3>
+                <button id="addPageBtn" class="page-btn">
+                    <i class="fas fa-plus"></i> Add Page
+                </button>
+            </div>
+            <div class="page-list" id="pageList">
+                <!-- Pages will be added here dynamically -->
+            </div>
+            <div class="page-sidebar-footer">
+                <span id="pageCount">Total Pages: 1</span>
+            </div>
+        </div>
+
+        <!-- Main Canvas Area -->
+        <div class="canvas-container">
+            <div class="canvas-wrapper">
+                <div id="canvas" class="canvas">
+                    <!-- Canvas elements will be added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar - Properties -->
+        <div class="sidebar sidebar-right">
+            <div class="properties-panel">
+                <h3>Properties</h3>
+                <!-- Common Properties (for both text and shapes) -->
+                <div class="property-section common-properties" style="display: none;">
+                    <div class="property-group">
+                        <label>Rotation</label>
+                        <div class="rotation-control">
+                            <input type="range" id="rotationSlider" min="0" max="360" value="0">
+                            <input type="number" id="rotationInput" min="0" max="360" value="0">
+                        </div>
+                    </div>
+                    <div class="property-group">
+                        <label>Position</label>
+                        <div class="position-control">
+                            <div class="input-group">
+                                <label>X</label>
+                                <input type="number" id="positionX" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label>Y</label>
+                                <input type="number" id="positionY" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Properties -->
+                <div class="property-section text-properties" style="display: none;">
+                    <div class="property-group">
+                        <label>Font Family</label>
+                        <select id="fontFamily">
+                            <!-- System Fonts -->
+                            <optgroup label="System Fonts">
+                                <option value="Arial">Arial</option>
+                                <option value="Helvetica">Helvetica</option>
+                                <option value="Verdana">Verdana</option>
+                                <option value="Tahoma">Tahoma</option>
+                                <option value="Trebuchet MS">Trebuchet MS</option>
+                            </optgroup>
+                            
+                            <!-- Modern Sans-serif Fonts -->
+                            <optgroup label="Modern Sans-serif">
+                                <option value="Roboto">Roboto</option>
+                                <option value="Open Sans">Open Sans</option>
+                                <option value="Poppins">Poppins</option>
+                                <option value="Montserrat">Montserrat</option>
+                                <option value="Lato">Lato</option>
+                                <option value="Inter">Inter</option>
+                                <option value="Nunito">Nunito</option>
+                                <option value="Source Sans Pro">Source Sans Pro</option>
+                            </optgroup>
+                            
+                            <!-- Serif Fonts -->
+                            <optgroup label="Serif">
+                                <option value="Times New Roman">Times New Roman</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Playfair Display">Playfair Display</option>
+                                <option value="Merriweather">Merriweather</option>
+                                <option value="Crimson Text">Crimson Text</option>
+                                <option value="Libre Baskerville">Libre Baskerville</option>
+                            </optgroup>
+                            
+                            <!-- Decorative/Handwriting -->
+                            <optgroup label="Decorative/Handwriting">
+                                <option value="Pacifico">Pacifico</option>
+                                <option value="Dancing Script">Dancing Script</option>
+                                <option value="Great Vibes">Great Vibes</option>
+                                <option value="Satisfy">Satisfy</option>
+                                <option value="Caveat">Caveat</option>
+                            </optgroup>
+                            
+                            <!-- Modern Geometric -->
+                            <optgroup label="Modern Geometric">
+                                <option value="Quicksand">Quicksand</option>
+                                <option value="Comfortaa">Comfortaa</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="property-group">
+                        <label>Font Size</label>
+                        <input type="number" id="fontSize" min="8" max="200" value="16">
+                    </div>
+                    <div class="property-group">
+                        <label>Color</label>
+                        <input type="color" id="textColor" value="#000000">
+                    </div>
+                    <div class="property-group button-group">
+                        <button id="boldBtn"><i class="fas fa-bold"></i></button>
+                        <button id="italicBtn"><i class="fas fa-italic"></i></button>
+                        <button id="underlineBtn"><i class="fas fa-underline"></i></button>
+                        <button id="alignLeftBtn"><i class="fas fa-align-left"></i></button>
+                        <button id="alignCenterBtn"><i class="fas fa-align-center"></i></button>
+                        <button id="alignRightBtn"><i class="fas fa-align-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Shape Properties -->
+                <div class="property-section shape-properties" style="display: none;">
+                    <div class="property-group">
+                        <label>Fill Color</label>
+                        <input type="color" id="shapeFillColor" value="#ffffff">
+                    </div>
+                    <div class="property-group">
+                        <label>Border Color</label>
+                        <input type="color" id="shapeBorderColor" value="#000000">
+                    </div>
+                    <div class="property-group">
+                        <label>Border Width</label>
+                        <input type="number" id="shapeBorderWidth" min="0" max="20" value="1">
+                    </div>
+                    <div class="property-group">
+                        <label>Opacity</label>
+                        <input type="range" id="shapeOpacity" min="0" max="100" value="100">
+                    </div>
+                    <div class="property-group">
+                        <label>Border Style</label>
+                        <select id="shapeBorderStyle">
+                            <option value="solid">Solid</option>
+                            <option value="dashed">Dashed</option>
+                            <option value="dotted">Dotted</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="no-selection-message">
+                    Select an element to edit its properties
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Selection Modal -->
+    <div id="templateModal" class="template-modal">
+        <div class="template-modal-content">
+            <div class="template-modal-header">
+                <h2>Choose a Template</h2>
+                <div class="template-search-filter">
+                    <div class="search-container">
+                        <input type="text" id="templateSearchInput" placeholder="Search templates...">
+                        <button id="templateSearchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="filter-container">
+                        <select id="templateCategoryFilter">
+                            <option value="all">All Categories</option>
+                            <option value="social">Social Media</option>
+                            <option value="presentation">Presentation</option>
+                            <option value="print">Print</option>
+                            <option value="marketing">Marketing</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="close-modal" id="closeTemplateModal">&times;</button>
+            </div>
+            <div class="template-modal-body">
+                <div class="template-category-label" id="templateCategoryLabel">
+                    Templates for: <span id="currentCanvasType">Instagram Post</span>
+                </div>
+                <div class="templates-grid" id="templatesGrid">
+                    <!-- Templates will be loaded here dynamically -->
+                </div>
+            </div>
+            <div class="template-modal-footer">
+                <div class="template-pagination">
+                    <button id="prevTemplatesPage" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                    <span id="templatePageIndicator">Page 1 of 1</span>
+                    <button id="nextTemplatesPage">Next <i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="js/editor.js"></script>
+</body>
+</html> 

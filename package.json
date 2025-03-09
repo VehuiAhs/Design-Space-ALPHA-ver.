@@ -1,0 +1,25 @@
+{
+  "name": "supabase-auth-system",
+  "version": "1.0.0",
+  "description": "A complete authentication system built with vanilla HTML, CSS, and JavaScript, powered by Supabase",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "supabase",
+    "authentication",
+    "vanilla-js",
+    "html",
+    "css"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+} 

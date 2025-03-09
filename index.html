@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Space</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Added futuristic fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Three.js for 3D animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP for smooth animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- Particles background container -->
+    <div id="particles-js" class="particles-container"></div>
+    
+    <div class="homepage-wrapper">
+        <!-- Navigation - Sleek, sticky navbar with glassmorphism -->
+        <header class="main-header">
+            <div class="header-container">
+                <div class="logo-container">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">
+                            <div class="logo-cube"></div>
+                        </div>
+                        <span class="logo-text">Design Space</span>
+                    </a>
+                </div>
+                
+                <nav id="nav-menu" class="main-nav">
+                    <ul class="nav-links">
+                        <li><a href="#templates" class="nav-link">Templates</a></li>
+                        <li><a href="#features" class="nav-link">Features</a></li>
+                        <li><a href="#future-tech" class="nav-link">Future Tech</a></li>
+                        <li><a href="signin.html" class="nav-link auth-link">Sign In</a></li>
+                        <li><a href="signup.html" class="nav-link auth-link">Sign Up</a></li>
+                        <li class="theme-toggle">
+                            <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
+                                <i class="fas fa-sun light-icon"></i>
+                                <i class="fas fa-moon dark-icon"></i>
+                            </button>
+                        </li>
+                        <li><a href="#" id="logout-btn" class="nav-link" style="display: none;">Logout</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Hero Section with 3D animation -->
+            <section class="hero-section parallax-section" data-speed="0.5">
+                <div class="hero-3d-container">
+                    <canvas id="hero-canvas"></canvas>
+                </div>
+                <div class="hero-container">
+                    <div class="hero-content hologram" data-aos="pixel-fade" data-aos-duration="1200">
+                        <h1 class="hero-title" data-text="Create stunning designs with ease">
+                            Create <span class="gradient-text">stunning designs</span> with ease
+                        </h1>
+                        <p class="hero-description" data-aos="fade-up" data-aos-delay="200">Unleash your creativity with our next-generation design platform</p>
+                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                            <a href="editor.html" class="primary-btn">
+                                <span class="btn-text">Get Started for Free</span>
+                                <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                            </a>
+                            <a href="#features" class="secondary-btn">Learn More</a>
+                        </div>
+                        
+                        <div class="hero-stats" data-aos="fade-up" data-aos-delay="600">
+                            <div class="stat-item glass-card">
+                                <i class="fas fa-users"></i>
+                                <span class="stat-label">Growing Community</span>
+                            </div>
+                            <div class="stat-item glass-card">
+                                <i class="fas fa-palette"></i>
+                                <span class="stat-label">Diverse Templates</span>
+                            </div>
+                            <div class="stat-item glass-card">
+                                <i class="fas fa-layer-group"></i>
+                                <span class="stat-label">Multiple Design Types</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image" data-aos="pixel-fade" data-aos-duration="1500">
+                        <div class="image-container">
+                            <img src="k3.jpg" alt="Graphic Design Tool">
+                            <div class="image-overlay"></div>
+                        </div>
+                        <div class="floating-element elem-1" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-image"></i></div>
+                        <div class="floating-element elem-2" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-font"></i></div>
+                        <div class="floating-element elem-3" data-aos="fade-up" data-aos-delay="600"><i class="fas fa-shapes"></i></div>
+                        <div class="floating-element elem-4" data-aos="fade-up" data-aos-delay="800"><i class="fas fa-chart-pie"></i></div>
+                        <div class="floating-element elem-5" data-aos="fade-up" data-aos-delay="1000"><i class="fas fa-code"></i></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- User Content (Only visible when logged in) -->
+            <section id="user-content" class="user-dashboard" style="display: none;">
+                <div class="dashboard-container">
+                    <div class="welcome-message">
+                        <h2>Welcome, <span id="user-email"></span>!</h2>
+                        <p>Continue where you left off or start a new design.</p>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <a href="#" class="action-card">
+                            <i class="fas fa-plus"></i>
+                            <span>New Design</span>
+                        </a>
+                        <a href="#" class="action-card">
+                            <i class="fas fa-folder"></i>
+                            <span>My Designs</span>
+                        </a>
+                        <a href="#" class="action-card">
+                            <i class="fas fa-star"></i>
+                            <span>Favorites</span>
+                        </a>
+                        <a href="#" class="action-card">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </div>
+                    
+                    <div class="recent-designs">
+                        <h3>Recent Designs</h3>
+                        <div class="designs-grid">
+                            <div class="design-card">
+                                <div class="design-thumbnail"></div>
+                                <p>Instagram Post</p>
+                            </div>
+                            <div class="design-card">
+                                <div class="design-thumbnail"></div>
+                                <p>Facebook Cover</p>
+                            </div>
+                            <div class="design-card">
+                                <div class="design-thumbnail"></div>
+                                <p>Business Card</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Templates Section with 3D animation -->
+            <section id="templates" class="templates-section">
+                <div class="section-3d-container">
+                    <canvas id="templates-canvas"></canvas>
+                </div>
+                <div class="section-container">
+                    <div class="section-header" data-aos="pixel-fade">
+                        <h2 class="section-title" data-text="Why Design Space?">Why <span class="gradient-text">Design Space</span>?</h2>
+                        <p class="section-subtitle">The creative universe where your ideas take shape</p>
+                    </div>
+                    
+                    <div class="design-space-concept" data-aos="fade-up" data-aos-delay="200">
+                        <div class="concept-content">
+                            <div class="concept-text">
+                                <h3 class="glitch-text" data-text="A Universe of Creative Possibilities">A Universe of Creative Possibilities</h3>
+                                <p>The name "Design Space" represents our vision of providing an infinite canvas for creativity. Just as space is boundless, we believe your creative potential should be too.</p>
+                                
+                                <div class="concept-points">
+                                    <div class="concept-point glass-card" data-aos="pixel-fade" data-aos-delay="400">
+                                        <i class="fas fa-cube"></i>
+                                        <span>Dimensional Thinking</span>
+                                    </div>
+                                    <div class="concept-point glass-card" data-aos="pixel-fade" data-aos-delay="600">
+                                        <i class="fas fa-brain"></i>
+                                        <span>Creative Freedom</span>
+                                    </div>
+                                    <div class="concept-point glass-card" data-aos="pixel-fade" data-aos-delay="800">
+                                        <i class="fas fa-rocket"></i>
+                                        <span>Future Ready</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="view-more-container">
+                        <a href="editor.html" class="btn secondary-btn">
+                            <span class="btn-text">Start Creating</span>
+                            <span class="btn-icon"><i class="fas fa-rocket"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Features Section with 3D animation -->
+            <section id="features" class="features-section">
+                <div class="section-3d-container">
+                    <canvas id="features-canvas"></canvas>
+                </div>
+                <div class="section-container">
+                    <div class="section-header" data-aos="pixel-fade">
+                        <h2 class="section-title" data-text="Powerful Features">Powerful <span class="gradient-text">Features</span></h2>
+                        <p class="section-subtitle">Everything you need to bring your vision to life</p>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card hologram" data-aos="pixel-fade" data-aos-delay="200">
+                            <div class="feature-icon">
+                                <i class="fas fa-wand-magic-sparkles"></i>
+                            </div>
+                            <h3>AI-Powered Design</h3>
+                            <p>Let our AI assist you in creating stunning designs with smart suggestions and automated layouts.</p>
+                        </div>
+                        
+                        <div class="feature-card hologram" data-aos="pixel-fade" data-aos-delay="400">
+                            <div class="feature-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <h3>Smart Templates</h3>
+                            <p>Access hundreds of professionally designed templates optimized for various platforms and purposes.</p>
+                        </div>
+                        
+                        <div class="feature-card hologram" data-aos="pixel-fade" data-aos-delay="600">
+                            <div class="feature-icon">
+                                <i class="fas fa-shapes"></i>
+                            </div>
+                            <h3>Custom Elements</h3>
+                            <p>Create and save your own design elements for quick access and consistent branding.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Future Tech Section with 3D animation -->
+            <section id="future-tech" class="future-tech-section">
+                <div class="section-3d-container">
+                    <canvas id="future-tech-canvas"></canvas>
+                </div>
+                <div class="section-container">
+                    <div class="section-header" data-aos="pixel-fade">
+                        <h2 class="section-title" data-text="The Future of Design">The <span class="gradient-text">Future</span> of Design</h2>
+                        <p class="section-subtitle">Experience tomorrow's technology today</p>
+                    </div>
+                    
+                    <div class="tech-features-grid">
+                        <div class="tech-feature glass-card" data-aos="pixel-fade" data-aos-delay="200">
+                            <div class="feature-icon">
+                                <i class="fas fa-vr-cardboard"></i>
+                            </div>
+                            <h3>3D Visualization</h3>
+                            <p>Preview your designs in immersive 3D space</p>
+                        </div>
+                        
+                        <div class="tech-feature glass-card" data-aos="pixel-fade" data-aos-delay="400">
+                            <div class="feature-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <h3>AI Integration</h3>
+                            <p>Smart design suggestions and automated improvements</p>
+                        </div>
+                        
+                        <div class="tech-feature glass-card" data-aos="pixel-fade" data-aos-delay="600">
+                            <div class="feature-icon">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h3>Real-time Collaboration</h3>
+                            <p>Work together seamlessly in real-time</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Pricing Section -->
+            <section id="future-tech" class="pricing-section">
+                <div class="section-container">
+                    <div class="section-header" data-aos="fade-up">
+                        <h2 class="section-title">For Future Tech Professionals</h2>
+                        <p class="section-subtitle">Created by ICT Students of Sumulong College of Arts and Sciences</p>
+                    </div>
+
+                    <div class="impact-grid" data-aos="fade-up" data-aos-delay="200">
+                        <div class="impact-card">
+                            <div class="impact-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="impact-content">
+                                <h3>Student-Friendly</h3>
+                                <p class="impact-description">Free for Filipino ICT students</p>
+                            </div>
+                        </div>
+
+                        <div class="impact-card">
+                            <div class="impact-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="impact-content">
+                                <h3>School Projects</h3>
+                                <p class="impact-description">Designed for academic requirements and capstone projects</p>
+                            </div>
+                        </div>
+
+                        <div class="impact-card">
+                            <div class="impact-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="impact-content">
+                                <h3>Tech Focus</h3>
+                                <p class="impact-description">Support for ICT students</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mission-section" data-aos="fade-up" data-aos-delay="300">
+                        <div class="mission-content">
+                            <h3>Why Design Space?</h3>
+                            <p>As Grade 12 ICT students from Sumulong College of Arts and Sciences (SCAS), we understand the challenges that students face in our field. That's why we created Design Space - to make it easier for you to create professional and beautiful designs for:</p>
+                            
+                            <div class="mission-points">
+                                <div class="mission-point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>System Documentation and Technical Reports</span>
+                                </div>
+                                <div class="mission-point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Capstone Project Presentations</span>
+                                </div>
+                                <div class="mission-point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>UI/UX Design Projects</span>
+                                </div>
+                                <div class="mission-point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Social Media Content for School Events</span>
+                                </div>
+                                <div class="mission-point">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Portfolio Building for Future Career</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="join-community">
+                            <h3>Join Us Today!</h3>
+                            <p>Be part of the growing community of Filipino ICT students using Design Space for their academic projects and requirements.</p>
+                            <div class="student-benefits">
+                                <div class="benefit-item">
+                                    <i class="fas fa-rocket"></i>
+                                    <span>Free Templates</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-users"></i>
+                                    <span>Student Community</span>
+                                </div>
+                                <div class="benefit-item">
+                                    <i class="fas fa-book"></i>
+                                    <span>Learning Resources</span>
+                                </div>
+                            </div>
+                            <div class="scas-note">
+                                <i class="fas fa-school"></i>
+                                <p>A project by SCAS ICT Students</p>
+                            </div>
+                            <a href="signup.html" class="btn primary-btn">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="section-container">
+                    <div class="cta-content" data-aos="zoom-in">
+                        <h2>Ready to start creating?</h2>
+                        <p>Join us in order to create beautiful designs with Design Space</p>
+                        <a href="signup.html" class="btn primary-btn">Get Started for Free</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="main-footer">
+            <div class="footer-container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3 class="footer-logo">Design Space</h3>
+                        <p>Create stunning designs with our easy-to-use and user friendly platform.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="#">Templates</a></li>
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">Future Tech</a></li>
+                            <li><a href="#">What's New</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Learn</h4>
+                        <ul>
+                            <li><a href="#">Tutorials</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Design School</a></li>
+                            <li><a href="#">Resources</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Community</a></li>
+                            <li><a href="#">Feedback</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Design Space. All rights reserved.</p>
+                    <div class="language-selector">
+                        <i class="fas fa-globe"></i>
+                        <select>
+                            <option>English</option>
+                            <option>Spanish</option>
+                            <option>French</option>
+                            <option>German</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Make Supabase available globally
+        const supabaseJs = supabase;
+    </script>
+    
+    <!-- Config -->
+    <script src="js/config.js"></script>
+    
+    <!-- Auth JS -->
+    <script src="js/auth.js"></script>
+    
+    <!-- Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Theme JS -->
+    <script src="js/theme.js"></script>
+    
+    <!-- Page-specific JS -->
+    <script src="js/home.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out',
+            once: false,
+            mirror: true,
+            anchorPlacement: 'top-bottom'
+        });
+        
+        // Initialize Particles.js with enhanced effects
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 100, density: { enable: true, value_area: 800 } },
+                color: { value: '#00f5d4' },
+                shape: {
+                    type: ['circle', 'triangle', 'polygon'],
+                    polygon: { nb_sides: 6 }
+                },
+                opacity: {
+                    value: 0.6,
+                    random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                },
+                size: {
+                    value: 4,
+                    random: true,
+                    anim: { enable: true, speed: 2, size_min: 0.1, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#00f5d4',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: ['repulse', 'grab'] },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 0.8 } },
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Three.js Animations
+        const initThreeJS = (canvasId) => {
+            const canvas = document.getElementById(canvasId);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            
+            // Add ambient light
+            const ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            
+            // Add directional light
+            const directionalLight = new THREE.DirectionalLight(0x00f5d4, 1);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+            
+            // Create geometry based on section
+            let geometry;
+            switch(canvasId) {
+                case 'hero-canvas':
+                    geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+                    break;
+                case 'templates-canvas':
+                    geometry = new THREE.OctahedronGeometry(1);
+                    break;
+                case 'features-canvas':
+                    geometry = new THREE.IcosahedronGeometry(1);
+                    break;
+                case 'future-tech-canvas':
+                    geometry = new THREE.DodecahedronGeometry(1);
+                    break;
+                default:
+                    geometry = new THREE.SphereGeometry(1, 32, 32);
+            }
+            
+            // Create material
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x00f5d4,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.7
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            scene.add(mesh);
+            
+            camera.position.z = 5;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                mesh.rotation.x += 0.01;
+                mesh.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            
+            // Handle resize
+            function handleResize() {
+                const width = canvas.clientWidth;
+                const height = canvas.clientHeight;
+                if (canvas.width !== width || canvas.height !== height) {
+                    renderer.setSize(width, height, false);
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize();
+            animate();
+        };
+
+        // Initialize Three.js for each section
+        ['hero-canvas', 'templates-canvas', 'features-canvas', 'future-tech-canvas'].forEach(initThreeJS);
+    </script>
+</body>
+</html>

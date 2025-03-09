@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Supabase Auth</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        
+        .error-message {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+        
+        .error-description {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Page Not Found</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="signin.html">Sign In</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="error-container">
+                <div class="error-code">404</div>
+                <h2 class="error-message">Page Not Found</h2>
+                <p class="error-description">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+                <a href="index.html" class="btn primary-btn">Go to Homepage</a>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Supabase Auth Demo. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html> 

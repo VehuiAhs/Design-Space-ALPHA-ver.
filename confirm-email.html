@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Email - Supabase Auth</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Email Confirmation</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="signin.html">Sign In</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="auth-form">
+                <div class="form-container">
+                    <h2>Confirm Your Email</h2>
+                    <div id="confirm-message" class="message">
+                        <p>Verifying your email...</p>
+                    </div>
+                    
+                    <div id="success-content" style="display: none;">
+                        <p>Your email has been successfully verified!</p>
+                        <div class="form-group">
+                            <a href="signin.html" class="btn primary-btn full-width">Sign In</a>
+                        </div>
+                    </div>
+                    
+                    <div id="error-content" style="display: none;">
+                        <p>There was an error verifying your email. The link may have expired or is invalid.</p>
+                        <div class="form-group">
+                            <a href="signup.html" class="btn secondary-btn">Back to Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2023 Supabase Auth Demo. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Supabase JS Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Make Supabase available globally
+        const supabaseJs = supabase;
+    </script>
+    
+    <!-- Config -->
+    <script src="js/config.js"></script>
+    
+    <!-- Auth JS -->
+    <script src="js/auth.js"></script>
+    
+    <!-- Page-specific JS -->
+    <script src="js/confirm-email.js"></script>
+</body>
+</html> 
